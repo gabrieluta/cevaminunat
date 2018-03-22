@@ -106,8 +106,34 @@
     outBuffer.height = CGImageGetHeight(img);
     outBuffer.rowBytes = CGImageGetBytesPerRow(img);
     
+//    If you plan to call this function multiple times
+//    *  (rather than with iterationCount > 1) on 8-bit per channel images, you can save some computation by converting the 8-bit image data to
+//    *  single precision floating-point yourself using something like vImageConvert_Planar8toPlanarF and iterating on the appropriate
+//    *  floating-point Richardson Lucy variant. Convert back, when you are done.
     //perform convolution - this is the call for our type of data
-    error = vImageBoxConvolve_ARGB8888(&inBuffer, &outBuffer, NULL, 0, 0, boxSize, boxSize, NULL, kvImageEdgeExtend);
+    
+    //Prepare data structures
+    int divisor = 9;
+    int iterationCount = 100;
+    const int16_t kernel[9] = {-2, -2, 0, -2, 6, 0, 0, 0, 0};
+    
+    error = vImageRichardsonLucyDeConvolve_ARGB8888(&inBuffer,
+                                                    &outBuffer,
+                                                    NULL,
+                                                    0,
+                                                    0,
+                                                    kernel,
+                                                    NULL,
+                                                    3,
+                                                    3,
+                                                    0,
+                                                    0,
+                                                    divisor,
+                                                    0,
+                                                    nil,
+                                                    iterationCount,
+                                                    0
+                                                    );
     
     //check for an error in the call to perform the convolution
     if (error) {
@@ -115,7 +141,6 @@
     }
     
     //create CGImageRef from vImage_Buffer output
-    //1 - CGBitmapContextCreateImage -
     
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     
@@ -123,9 +148,10 @@
                                              outBuffer.width,
                                              outBuffer.height,
                                              8,
-                                             outBuffer.rowBytes,
+                                             outBuffer.width * 4,
                                              colorSpace,
-                                             kCGImageAlphaPremultipliedLast);
+                                             (CGBitmapInfo)kCGImageAlphaNoneSkipLast);
+    
     CGImageRef imageRef = CGBitmapContextCreateImage(ctx);
     
     UIImage *returnImage = [UIImage imageWithCGImage:imageRef];

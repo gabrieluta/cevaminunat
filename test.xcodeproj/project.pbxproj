@@ -11,7 +11,6 @@
 		C386F0C320625A3A00FE571A /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C386F0C220625A3A00FE571A /* CoreImage.framework */; };
 		C386F0C62062625000FE571A /* DeconvolutionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C386F0C52062625000FE571A /* DeconvolutionFilter.m */; };
 		C386F0CB2062748E00FE571A /* testkernel.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = C386F0CA2062748E00FE571A /* testkernel.cikernel */; };
-		C386F0CF2062895A00FE571A /* blurredImage.png in Resources */ = {isa = PBXBuildFile; fileRef = C386F0CE2062895A00FE571A /* blurredImage.png */; };
 		C386F0D12062BA9800FE571A /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C386F0D02062BA9800FE571A /* Accelerate.framework */; };
 		C3C35077205ACD5E000087AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C35076205ACD5E000087AF /* AppDelegate.m */; };
 		C3C3507A205ACD5E000087AF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C35079205ACD5E000087AF /* ViewController.m */; };
@@ -46,7 +45,6 @@
 		C386F0C42062625000FE571A /* DeconvolutionFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeconvolutionFilter.h; sourceTree = "<group>"; };
 		C386F0C52062625000FE571A /* DeconvolutionFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeconvolutionFilter.m; sourceTree = "<group>"; };
 		C386F0CA2062748E00FE571A /* testkernel.cikernel */ = {isa = PBXFileReference; lastKnownFileType = text; path = testkernel.cikernel; sourceTree = "<group>"; };
-		C386F0CE2062895A00FE571A /* blurredImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blurredImage.png; path = test/Assets.xcassets/blurredImage.imageset/blurredImage.png; sourceTree = "<group>"; };
 		C386F0D02062BA9800FE571A /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		C3C35072205ACD5E000087AF /* test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3C35075205ACD5E000087AF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 		C3C35069205ACD5E000087AF = {
 			isa = PBXGroup;
 			children = (
-				C386F0CE2062895A00FE571A /* blurredImage.png */,
 				C3C35074205ACD5E000087AF /* test */,
 				C3C3508D205ACD5E000087AF /* testTests */,
 				C3C35098205ACD5E000087AF /* testUITests */,
@@ -272,7 +269,6 @@
 				C3C35082205ACD5E000087AF /* LaunchScreen.storyboard in Resources */,
 				C3C3507F205ACD5E000087AF /* Assets.xcassets in Resources */,
 				C3C3507D205ACD5E000087AF /* Main.storyboard in Resources */,
-				C386F0CF2062895A00FE571A /* blurredImage.png in Resources */,
 				C386F0CB2062748E00FE571A /* testkernel.cikernel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
