@@ -1,0 +1,39 @@
+kernel vec4 deblur(sampler source_image)
+{
+vec4 currentPixelValue = sample(source_image, samplerCoord(source_image));
+vec2 currentPixelCoord = destCoord();
+
+/*
+vec2 bottomLeftPixelCoord  = samplerTransform(source_image, currentPixelCoord + vec2(-1.0,-1.0));
+vec2 bottomRightPixelCoord = samplerTransform(source_image, currentPixelCoord + vec2(+1.0,-1.0));
+vec2 topLeftPixelCoord     = samplerTransform(source_image, currentPixelCoord + vec2(-1.0,+1.0));
+vec2 topRightPixelCoord    = samplerTransform(source_image, currentPixelCoord + vec2(+1.0,+1.0));
+vec2 rightPixelCoord       = samplerTransform(source_image, currentPixelCoord + vec2(+1.0,+0.0));
+vec2 topPixelCoord         = samplerTransform(source_image, currentPixelCoord + vec2(+0.0,+1.0));
+vec2 leftPixelCoord        = samplerTransform(source_image, currentPixelCoord + vec2(-1.0,+0.0));
+vec2 bottomPixelCoord      = samplerTransform(source_image, currentPixelCoord + vec2(+0.0,-1.0));
+
+vec4 bottomLeftPixelValue  = sample(source_image, bottomLeftPixelCoord);
+vec4 bottomRightPixelValue = sample(source_image, bottomRightPixelCoord);
+vec4 topLeftPixelValue     = sample(source_image, topLeftPixelCoord);
+vec4 topRightPixelValue    = sample(source_image, topRightPixelCoord);
+vec4 rightPixelValue       = sample(source_image, rightPixelCoord);
+vec4 topPixelValue         = sample(source_image, topPixelCoord);
+vec4 leftPixelValue        = sample(source_image, leftPixelCoord);
+vec4 bottomPixelValue      = sample(source_image, bottomPixelCoord);
+
+
+currentPixelValue.a = bottomLeftPixelValue.a * 0.0 +
+                      bottomRightPixelCoord.a * 0.4 +
+                      topLeftPixelCoord.a * 0.6 +
+                      topRightPixelCoord.a * 0.0 +
+                      rightPixelCoord.a * 0.0 +
+                      topPixelCoord.a * 0.0 +
+                      leftPixelCoord.a * 0.0 +
+                      bottomPixelCoord.a * 0.0;
+
+*/
+
+return currentPixelValue;
+
+}
