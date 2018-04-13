@@ -32,6 +32,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.image.image =  [UIImage imageNamed:@"blurredImage"];
+    self.image.contentMode = UIViewContentModeScaleToFill;
 }
 
 - (void)didTapDeblurButton {
@@ -113,27 +114,23 @@
     //perform convolution - this is the call for our type of data
     
     //Prepare data structures
-    int divisor = 9;
-    int iterationCount = 100;
-    const int16_t kernel[9] = {-2, -2, 0, -2, 6, 0, 0, 0, 0};
-    
-    error = vImageRichardsonLucyDeConvolve_ARGB8888(&inBuffer,
-                                                    &outBuffer,
-                                                    NULL,
-                                                    0,
-                                                    0,
-                                                    kernel,
-                                                    NULL,
-                                                    3,
-                                                    3,
-                                                    0,
-                                                    0,
-                                                    divisor,
-                                                    0,
-                                                    nil,
-                                                    iterationCount,
-                                                    0
-                                                    );
+//    int divisor = 9;
+//    int iterationCount = 100;
+    const float kernel[9] = {-1/8, -1/8, -1/8, -1/8, 1, -1/8, -1/8, -1/8, -1/8};
+//    unsigned char bgColor[4] = { 0, 0, 0, 0 };
+    Pixel_F backgroundColor = 0.5;
+
+    error = vImageConvolve_PlanarF(&inBuffer,
+                                   &outBuffer,
+                                   nil,
+                                   0,
+                                   0,
+                                   kernel,
+                                   3,
+                                   3,
+                                   backgroundColor,
+                                   kvImageCopyInPlace
+                                   );
     
     //check for an error in the call to perform the convolution
     if (error) {
@@ -142,15 +139,15 @@
     
     //create CGImageRef from vImage_Buffer output
     
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
     
     CGContextRef ctx = CGBitmapContextCreate(outBuffer.data,
                                              outBuffer.width,
                                              outBuffer.height,
-                                             8,
+                                             32,
                                              outBuffer.width * 4,
                                              colorSpace,
-                                             (CGBitmapInfo)kCGImageAlphaNoneSkipLast);
+                                             (CGBitmapInfo)kCGImageAlphaNone|kCGBitmapFloatComponents);
     
     CGImageRef imageRef = CGBitmapContextCreateImage(ctx);
     
