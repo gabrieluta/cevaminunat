@@ -22,15 +22,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "test/ViewController.m"
-            timestampString = "545318603.718648"
+            timestampString = "547117820.0557491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "-boxblurImage:boxSize:"
             landmarkType = "7">
          </BreakpointContent>

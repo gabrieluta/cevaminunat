@@ -11,8 +11,8 @@ import scipy.misc
 # import LinearMotionBlur
 from scipy.signal import convolve2d
 
-path = "/Users/gabrielad/cevaminunat/imageProcessing/images/"
-blurredpath = "/Users/gabrielad/cevaminunat/imageProcessing/blurred_images/"
+path = "/Users/gabrielad/Desktop/images_less/"
+blurredpath = "/Users/gabrielad/Desktop/train_less/"
 orientations3 = [0, 45, 90, 135]
 orientations = [0, 30, 60, 90, 120, 150]
 # 1 doesn't count because it will correspond to identity kernel
@@ -83,7 +83,7 @@ def main():
     for (dirpath, dirnames, filenames) in walk(path):
         f.extend(filenames)
         break
-    f.remove('.DS_Store')
+    # f.remove('.DS_Store')
     for imagepath in f:
 
         image = cv2.imread(path + imagepath)

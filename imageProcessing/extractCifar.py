@@ -33,9 +33,8 @@ imgarray, lblarray = extractImagesAndLabels("/Users/gabrielad/cevaminunat/imageP
 categories = extractCategories("/Users/gabrielad/cevaminunat/imageProcessing/", "batches.meta")
 
 cats = []
-for i in range(0,10000):
-    saveCifarImage(imgarray[i], "/Users/gabrielad/cevaminunat/imageProcessing/images/", "image"+(str)(i))
+for i in range(0,500):
+    saveCifarImage(imgarray[i], "/Users/gabrielad/Desktop/images_less/", "image"+(str)(i))
     category = lblarray[i].asnumpy()
     category = (int)(category[0])
     cats.append(categories[category])
-# print(cats)

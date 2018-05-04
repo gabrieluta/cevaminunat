@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "DeconvolutionFilter.h"
 #import <Accelerate/Accelerate.h>
+#import "KernelGenerator.h"
 
 @interface ViewController ()
 
@@ -31,7 +32,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.image.image =  [UIImage imageNamed:@"blurredImage"];
+    self.image.image =  [UIImage imageNamed:@"img"];
     self.image.contentMode = UIViewContentModeScaleToFill;
 }
 
@@ -107,30 +108,30 @@
     outBuffer.height = CGImageGetHeight(img);
     outBuffer.rowBytes = CGImageGetBytesPerRow(img);
     
-//    If you plan to call this function multiple times
-//    *  (rather than with iterationCount > 1) on 8-bit per channel images, you can save some computation by converting the 8-bit image data to
-//    *  single precision floating-point yourself using something like vImageConvert_Planar8toPlanarF and iterating on the appropriate
-//    *  floating-point Richardson Lucy variant. Convert back, when you are done.
-    //perform convolution - this is the call for our type of data
-    
     //Prepare data structures
 //    int divisor = 9;
 //    int iterationCount = 100;
-    const float kernel[9] = {-1/8, -1/8, -1/8, -1/8, 1, -1/8, -1/8, -1/8, -1/8};
+    int16_t kernel[9] = {0, 0, 1, 0, 1, 0, 1, 0, 0};
 //    unsigned char bgColor[4] = { 0, 0, 0, 0 };
-    Pixel_F backgroundColor = 0.5;
-
-    error = vImageConvolve_PlanarF(&inBuffer,
-                                   &outBuffer,
-                                   nil,
-                                   0,
-                                   0,
-                                   kernel,
-                                   3,
-                                   3,
-                                   backgroundColor,
-                                   kvImageCopyInPlace
-                                   );
+//    Pixel_F backgroundColor = 0.5;
+    KernelGenerator kernel = [[KernelGenerator alloc] init];
+    kernel kernel
+    error = vImageRichardsonLucyDeConvolve_ARGB8888(&inBuffer,
+                                                    &outBuffer,
+                                                    nil,
+                                                    0,
+                                                    0,
+                                                    kernel,
+                                                    nil,
+                                                    3,
+                                                    3,
+                                                    0,
+                                                    0,
+                                                    3,
+                                                    0,
+                                                    nil,
+                                                    10,
+                                                    kvImageCopyInPlace);
     
     //check for an error in the call to perform the convolution
     if (error) {
@@ -139,15 +140,15 @@
     
     //create CGImageRef from vImage_Buffer output
     
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     
     CGContextRef ctx = CGBitmapContextCreate(outBuffer.data,
                                              outBuffer.width,
                                              outBuffer.height,
-                                             32,
-                                             outBuffer.width * 4,
+                                             8,
+                                             outBuffer.rowBytes,
                                              colorSpace,
-                                             (CGBitmapInfo)kCGImageAlphaNone|kCGBitmapFloatComponents);
+                                             kCGImageAlphaNoneSkipLast);
     
     CGImageRef imageRef = CGBitmapContextCreateImage(ctx);
     
