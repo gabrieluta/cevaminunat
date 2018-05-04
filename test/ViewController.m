@@ -114,8 +114,8 @@
     int16_t kernel[9] = {0, 0, 1, 0, 1, 0, 1, 0, 0};
 //    unsigned char bgColor[4] = { 0, 0, 0, 0 };
 //    Pixel_F backgroundColor = 0.5;
-    KernelGenerator kernel = [[KernelGenerator alloc] init];
-    kernel kernel
+    KernelGenerator *kernelGenerator = [[KernelGenerator alloc] init];
+    [kernelGenerator kernelWithLength:3 orientation:45];
     error = vImageRichardsonLucyDeConvolve_ARGB8888(&inBuffer,
                                                     &outBuffer,
                                                     nil,

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "test/KernelGenerator.m"
-            timestampString = "547126728.518568"
+            timestampString = "547127953.554207"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "-kernelWithLength:orientation:"
             landmarkType = "7">
          </BreakpointContent>
