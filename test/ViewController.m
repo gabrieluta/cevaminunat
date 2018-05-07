@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "DeconvolutionFilter.h"
 #import <Accelerate/Accelerate.h>
 #import "KernelGenerator.h"
 
@@ -115,7 +114,7 @@
 //    unsigned char bgColor[4] = { 0, 0, 0, 0 };
 //    Pixel_F backgroundColor = 0.5;
     KernelGenerator *kernelGenerator = [[KernelGenerator alloc] init];
-    [kernelGenerator kernelWithLength:3 orientation:45];
+    [kernelGenerator kernelWithLength:11 orientation:60];
     error = vImageRichardsonLucyDeConvolve_ARGB8888(&inBuffer,
                                                     &outBuffer,
                                                     nil,

@@ -6,7 +6,6 @@ target 'test' do
   # use_frameworks!
 
   # Pods for test
-  pod 'OpenCV', '~> 3.2'
 
   target 'testTests' do
     inherit! :search_paths
