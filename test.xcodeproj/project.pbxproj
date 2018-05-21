@@ -10,6 +10,22 @@
 		19C875046B83E112287B14A7 /* libPods-testTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D6C045685F5B8C9A07257C /* libPods-testTests.a */; };
 		29F66CA51FCD41F08AE6CB5C /* libPods-testUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A02D50334D81E91F4BF5FF /* libPods-testUITests.a */; };
 		8047FFD0F7FE3707C8E8AF44 /* libPods-test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E254425507D2FA2E881E60C0 /* libPods-test.a */; };
+		C33A000C20B2CF3F001F90E6 /* CameraPickerPhotoCaptureDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A000B20B2CF3F001F90E6 /* CameraPickerPhotoCaptureDelegate.m */; };
+		C33A000F20B2D8A3001F90E6 /* CameraPickerPhotoResizeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A000E20B2D8A3001F90E6 /* CameraPickerPhotoResizeHeaderView.m */; };
+		C33A001220B2DC24001F90E6 /* CameraPickerPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A001120B2DC24001F90E6 /* CameraPickerPreviewView.m */; };
+		C33A001520B2DC76001F90E6 /* CameraPickerResourceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A001420B2DC76001F90E6 /* CameraPickerResourceLoader.m */; };
+		C33A001820B2DD4A001F90E6 /* CameraPickerUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A001720B2DD4A001F90E6 /* CameraPickerUIUtils.m */; };
+		C33A001E20B2DDC4001F90E6 /* CameraPickerUnfoldableOptionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A001D20B2DDC4001F90E6 /* CameraPickerUnfoldableOptionsView.m */; };
+		C33A002120B2E041001F90E6 /* CameraPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A002020B2E041001F90E6 /* CameraPickerViewController.m */; };
+		C33A002420B2E32A001F90E6 /* UIButton+CameraPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A002320B2E32A001F90E6 /* UIButton+CameraPicker.m */; };
+		C33A002720B2E3DE001F90E6 /* UIImage+CameraPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A002620B2E3DE001F90E6 /* UIImage+CameraPicker.m */; };
+		C33A002A20B2F0BE001F90E6 /* AVCapturePhoto+CameraPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A002920B2F0BE001F90E6 /* AVCapturePhoto+CameraPicker.m */; };
+		C33A002D20B2F161001F90E6 /* CameraPickerAVFoundationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A002C20B2F161001F90E6 /* CameraPickerAVFoundationModel.m */; };
+		C34E714620AF0FF2002AC3BF /* CameraPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E714520AF0FF2002AC3BF /* CameraPickerController.m */; };
+		C34E714A20AF1461002AC3BF /* CameraButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E714920AF1461002AC3BF /* CameraButton.m */; };
+		C34E714D20AF1776002AC3BF /* CameraPickerAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E714C20AF1776002AC3BF /* CameraPickerAppearance.m */; };
+		C34E715020AF19FC002AC3BF /* CameraPickerFlashHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E714F20AF19FC002AC3BF /* CameraPickerFlashHeaderView.m */; };
+		C34E715320AF264A002AC3BF /* CameraPickerOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E715220AF264A002AC3BF /* CameraPickerOverlayView.m */; };
 		C386F0C120625A3500FE571A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C386F0C020625A3500FE571A /* CoreGraphics.framework */; };
 		C386F0C320625A3A00FE571A /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C386F0C220625A3A00FE571A /* CoreImage.framework */; };
 		C386F0D12062BA9800FE571A /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C386F0D02062BA9800FE571A /* Accelerate.framework */; };
@@ -46,6 +62,38 @@
 		5EADFCF51B2A731BF33590D2 /* Pods-testUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-testUITests/Pods-testUITests.release.xcconfig"; sourceTree = "<group>"; };
 		63A2235B7ED0CD8E4EE953BA /* Pods-testTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-testTests/Pods-testTests.release.xcconfig"; sourceTree = "<group>"; };
 		AB444E3197C680E98BEF10C4 /* Pods-testTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testTests/Pods-testTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C33A000A20B2CF3F001F90E6 /* CameraPickerPhotoCaptureDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerPhotoCaptureDelegate.h; sourceTree = "<group>"; };
+		C33A000B20B2CF3F001F90E6 /* CameraPickerPhotoCaptureDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerPhotoCaptureDelegate.m; sourceTree = "<group>"; };
+		C33A000D20B2D8A3001F90E6 /* CameraPickerPhotoResizeHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerPhotoResizeHeaderView.h; sourceTree = "<group>"; };
+		C33A000E20B2D8A3001F90E6 /* CameraPickerPhotoResizeHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerPhotoResizeHeaderView.m; sourceTree = "<group>"; };
+		C33A001020B2DC24001F90E6 /* CameraPickerPreviewView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerPreviewView.h; sourceTree = "<group>"; };
+		C33A001120B2DC24001F90E6 /* CameraPickerPreviewView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerPreviewView.m; sourceTree = "<group>"; };
+		C33A001320B2DC76001F90E6 /* CameraPickerResourceLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerResourceLoader.h; sourceTree = "<group>"; };
+		C33A001420B2DC76001F90E6 /* CameraPickerResourceLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerResourceLoader.m; sourceTree = "<group>"; };
+		C33A001620B2DD4A001F90E6 /* CameraPickerUIUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerUIUtils.h; sourceTree = "<group>"; };
+		C33A001720B2DD4A001F90E6 /* CameraPickerUIUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerUIUtils.m; sourceTree = "<group>"; };
+		C33A001C20B2DDC4001F90E6 /* CameraPickerUnfoldableOptionsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerUnfoldableOptionsView.h; sourceTree = "<group>"; };
+		C33A001D20B2DDC4001F90E6 /* CameraPickerUnfoldableOptionsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerUnfoldableOptionsView.m; sourceTree = "<group>"; };
+		C33A001F20B2E041001F90E6 /* CameraPickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerViewController.h; sourceTree = "<group>"; };
+		C33A002020B2E041001F90E6 /* CameraPickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerViewController.m; sourceTree = "<group>"; };
+		C33A002220B2E32A001F90E6 /* UIButton+CameraPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+CameraPicker.h"; sourceTree = "<group>"; };
+		C33A002320B2E32A001F90E6 /* UIButton+CameraPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CameraPicker.m"; sourceTree = "<group>"; };
+		C33A002520B2E3DE001F90E6 /* UIImage+CameraPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+CameraPicker.h"; sourceTree = "<group>"; };
+		C33A002620B2E3DE001F90E6 /* UIImage+CameraPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CameraPicker.m"; sourceTree = "<group>"; };
+		C33A002820B2F0BE001F90E6 /* AVCapturePhoto+CameraPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVCapturePhoto+CameraPicker.h"; sourceTree = "<group>"; };
+		C33A002920B2F0BE001F90E6 /* AVCapturePhoto+CameraPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AVCapturePhoto+CameraPicker.m"; sourceTree = "<group>"; };
+		C33A002B20B2F161001F90E6 /* CameraPickerAVFoundationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerAVFoundationModel.h; sourceTree = "<group>"; };
+		C33A002C20B2F161001F90E6 /* CameraPickerAVFoundationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerAVFoundationModel.m; sourceTree = "<group>"; };
+		C34E714420AF0FF2002AC3BF /* CameraPickerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerController.h; sourceTree = "<group>"; };
+		C34E714520AF0FF2002AC3BF /* CameraPickerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerController.m; sourceTree = "<group>"; };
+		C34E714820AF1461002AC3BF /* CameraButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraButton.h; sourceTree = "<group>"; };
+		C34E714920AF1461002AC3BF /* CameraButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraButton.m; sourceTree = "<group>"; };
+		C34E714B20AF1775002AC3BF /* CameraPickerAppearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerAppearance.h; sourceTree = "<group>"; };
+		C34E714C20AF1776002AC3BF /* CameraPickerAppearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerAppearance.m; sourceTree = "<group>"; };
+		C34E714E20AF19FC002AC3BF /* CameraPickerFlashHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerFlashHeaderView.h; sourceTree = "<group>"; };
+		C34E714F20AF19FC002AC3BF /* CameraPickerFlashHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerFlashHeaderView.m; sourceTree = "<group>"; };
+		C34E715120AF264A002AC3BF /* CameraPickerOverlayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerOverlayView.h; sourceTree = "<group>"; };
+		C34E715220AF264A002AC3BF /* CameraPickerOverlayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerOverlayView.m; sourceTree = "<group>"; };
 		C386F0C020625A3500FE571A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C386F0C220625A3A00FE571A /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		C386F0D02062BA9800FE571A /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -118,6 +166,43 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C34E714720AF144D002AC3BF /* CameraPicker */ = {
+			isa = PBXGroup;
+			children = (
+				C34E714820AF1461002AC3BF /* CameraButton.h */,
+				C34E714920AF1461002AC3BF /* CameraButton.m */,
+				C34E714B20AF1775002AC3BF /* CameraPickerAppearance.h */,
+				C34E714C20AF1776002AC3BF /* CameraPickerAppearance.m */,
+				C34E714E20AF19FC002AC3BF /* CameraPickerFlashHeaderView.h */,
+				C34E714F20AF19FC002AC3BF /* CameraPickerFlashHeaderView.m */,
+				C34E715120AF264A002AC3BF /* CameraPickerOverlayView.h */,
+				C34E715220AF264A002AC3BF /* CameraPickerOverlayView.m */,
+				C33A000A20B2CF3F001F90E6 /* CameraPickerPhotoCaptureDelegate.h */,
+				C33A000B20B2CF3F001F90E6 /* CameraPickerPhotoCaptureDelegate.m */,
+				C33A000D20B2D8A3001F90E6 /* CameraPickerPhotoResizeHeaderView.h */,
+				C33A000E20B2D8A3001F90E6 /* CameraPickerPhotoResizeHeaderView.m */,
+				C33A001020B2DC24001F90E6 /* CameraPickerPreviewView.h */,
+				C33A001120B2DC24001F90E6 /* CameraPickerPreviewView.m */,
+				C33A001320B2DC76001F90E6 /* CameraPickerResourceLoader.h */,
+				C33A001420B2DC76001F90E6 /* CameraPickerResourceLoader.m */,
+				C33A001620B2DD4A001F90E6 /* CameraPickerUIUtils.h */,
+				C33A001720B2DD4A001F90E6 /* CameraPickerUIUtils.m */,
+				C33A001C20B2DDC4001F90E6 /* CameraPickerUnfoldableOptionsView.h */,
+				C33A001D20B2DDC4001F90E6 /* CameraPickerUnfoldableOptionsView.m */,
+				C33A001F20B2E041001F90E6 /* CameraPickerViewController.h */,
+				C33A002020B2E041001F90E6 /* CameraPickerViewController.m */,
+				C33A002220B2E32A001F90E6 /* UIButton+CameraPicker.h */,
+				C33A002320B2E32A001F90E6 /* UIButton+CameraPicker.m */,
+				C33A002520B2E3DE001F90E6 /* UIImage+CameraPicker.h */,
+				C33A002620B2E3DE001F90E6 /* UIImage+CameraPicker.m */,
+				C33A002820B2F0BE001F90E6 /* AVCapturePhoto+CameraPicker.h */,
+				C33A002920B2F0BE001F90E6 /* AVCapturePhoto+CameraPicker.m */,
+				C33A002B20B2F161001F90E6 /* CameraPickerAVFoundationModel.h */,
+				C33A002C20B2F161001F90E6 /* CameraPickerAVFoundationModel.m */,
+			);
+			path = CameraPicker;
+			sourceTree = "<group>";
+		};
 		C386F0BF20625A3500FE571A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +241,7 @@
 		C3C35074205ACD5E000087AF /* test */ = {
 			isa = PBXGroup;
 			children = (
+				C34E714720AF144D002AC3BF /* CameraPicker */,
 				C3CF30FB209C4A0B005AFD40 /* Media.xcassets */,
 				C3C35075205ACD5E000087AF /* AppDelegate.h */,
 				C3C35076205ACD5E000087AF /* AppDelegate.m */,
@@ -167,6 +253,8 @@
 				C3C35084205ACD5E000087AF /* main.m */,
 				C3CF30FD209C5BBA005AFD40 /* KernelGenerator.h */,
 				C3CF30FE209C5BBA005AFD40 /* KernelGenerator.m */,
+				C34E714420AF0FF2002AC3BF /* CameraPickerController.h */,
+				C34E714520AF0FF2002AC3BF /* CameraPickerController.m */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -200,8 +288,6 @@
 				C3C3506E205ACD5E000087AF /* Sources */,
 				C3C3506F205ACD5E000087AF /* Frameworks */,
 				C3C35070205ACD5E000087AF /* Resources */,
-				8161BCA8A14F88A7F14BDFF3 /* [CP] Embed Pods Frameworks */,
-				A981A55068A892ADAFD16F65 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -220,8 +306,6 @@
 				C3C35086205ACD5E000087AF /* Sources */,
 				C3C35087205ACD5E000087AF /* Frameworks */,
 				C3C35088205ACD5E000087AF /* Resources */,
-				2D879E88CB69DF238757B666 /* [CP] Embed Pods Frameworks */,
-				01633163871A576B7D679554 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -241,8 +325,6 @@
 				C3C35091205ACD5E000087AF /* Sources */,
 				C3C35092205ACD5E000087AF /* Frameworks */,
 				C3C35093205ACD5E000087AF /* Resources */,
-				759F5E908ED20FEDA041D0E1 /* [CP] Embed Pods Frameworks */,
-				AF124D25AE60052DCCDC0E3D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -327,36 +409,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		01633163871A576B7D679554 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-testTests/Pods-testTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2D879E88CB69DF238757B666 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-testTests/Pods-testTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3A174C0CA2A4A3A550926032 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -375,36 +427,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		759F5E908ED20FEDA041D0E1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-testUITests/Pods-testUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8161BCA8A14F88A7F14BDFF3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-test/Pods-test-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		89C2A91369D42B92273D9F8B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -421,36 +443,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A981A55068A892ADAFD16F65 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-test/Pods-test-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AF124D25AE60052DCCDC0E3D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-testUITests/Pods-testUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B699A47BC3A26DAEE6E8216B /* [CP] Check Pods Manifest.lock */ = {
@@ -479,8 +471,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3CF30FF209C5BBA005AFD40 /* KernelGenerator.m in Sources */,
+				C33A001820B2DD4A001F90E6 /* CameraPickerUIUtils.m in Sources */,
+				C33A000C20B2CF3F001F90E6 /* CameraPickerPhotoCaptureDelegate.m in Sources */,
+				C33A002D20B2F161001F90E6 /* CameraPickerAVFoundationModel.m in Sources */,
+				C34E714A20AF1461002AC3BF /* CameraButton.m in Sources */,
+				C34E715320AF264A002AC3BF /* CameraPickerOverlayView.m in Sources */,
+				C34E714D20AF1776002AC3BF /* CameraPickerAppearance.m in Sources */,
+				C33A001220B2DC24001F90E6 /* CameraPickerPreviewView.m in Sources */,
+				C33A002720B2E3DE001F90E6 /* UIImage+CameraPicker.m in Sources */,
 				C3C3507A205ACD5E000087AF /* ViewController.m in Sources */,
+				C33A002420B2E32A001F90E6 /* UIButton+CameraPicker.m in Sources */,
+				C33A001E20B2DDC4001F90E6 /* CameraPickerUnfoldableOptionsView.m in Sources */,
+				C33A001520B2DC76001F90E6 /* CameraPickerResourceLoader.m in Sources */,
+				C34E714620AF0FF2002AC3BF /* CameraPickerController.m in Sources */,
 				C3C35085205ACD5E000087AF /* main.m in Sources */,
+				C33A002A20B2F0BE001F90E6 /* AVCapturePhoto+CameraPicker.m in Sources */,
+				C33A000F20B2D8A3001F90E6 /* CameraPickerPhotoResizeHeaderView.m in Sources */,
+				C33A002120B2E041001F90E6 /* CameraPickerViewController.m in Sources */,
+				C34E715020AF19FC002AC3BF /* CameraPickerFlashHeaderView.m in Sources */,
 				C3C35077205ACD5E000087AF /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
