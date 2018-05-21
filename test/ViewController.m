@@ -68,6 +68,16 @@
     return result;
 }
 
+- (void)presentImagePickerControllerWithOptions:(NSDictionary *)options
+                                       delegate:(id<PSAImagePickerControllerDelegate>)delegate {
+    
+    PSAImagePickerController *imagePickerController = [[PSAImagePickerController alloc] initWithOptions:options];
+    imagePickerController.delegate = delegate;
+    
+    self.pickerController = imagePickerController;
+    [self.pickerController present];
+}
+
 -(UIImage *)boxblurImage:(UIImage *)image boxSize:(int)boxSize {
     //Get CGImage from UIImage
     CGImageRef img = image.CGImage;
