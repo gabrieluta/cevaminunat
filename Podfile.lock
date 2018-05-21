@@ -1,3 +1,16 @@
-PODFILE CHECKSUM: f9caba3e4ae471b41bb834008ae735b8cfe96785
+PODS:
+  - QBImagePickerController (3.4.0)
+
+DEPENDENCIES:
+  - QBImagePickerController
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - QBImagePickerController
+
+SPEC CHECKSUMS:
+  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
+
+PODFILE CHECKSUM: 870f90a01622d82c4a18886dcfa7bf3bc02ac573
 
 COCOAPODS: 1.5.2

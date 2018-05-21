@@ -18,3 +18,5 @@ target 'test' do
   end
 
 end
+
+pod "QBImagePickerController"

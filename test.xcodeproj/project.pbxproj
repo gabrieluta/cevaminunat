@@ -21,7 +21,8 @@
 		C33A002720B2E3DE001F90E6 /* UIImage+CameraPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A002620B2E3DE001F90E6 /* UIImage+CameraPicker.m */; };
 		C33A002A20B2F0BE001F90E6 /* AVCapturePhoto+CameraPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A002920B2F0BE001F90E6 /* AVCapturePhoto+CameraPicker.m */; };
 		C33A002D20B2F161001F90E6 /* CameraPickerAVFoundationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A002C20B2F161001F90E6 /* CameraPickerAVFoundationModel.m */; };
-		C34E714620AF0FF2002AC3BF /* CameraPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E714520AF0FF2002AC3BF /* CameraPickerController.m */; };
+		C33A003120B30651001F90E6 /* ImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A003020B30651001F90E6 /* ImagePickerController.m */; };
+		C33A003520B3131A001F90E6 /* PhotosLibraryPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A003420B3131A001F90E6 /* PhotosLibraryPickerController.m */; };
 		C34E714A20AF1461002AC3BF /* CameraButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E714920AF1461002AC3BF /* CameraButton.m */; };
 		C34E714D20AF1776002AC3BF /* CameraPickerAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E714C20AF1776002AC3BF /* CameraPickerAppearance.m */; };
 		C34E715020AF19FC002AC3BF /* CameraPickerFlashHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C34E714F20AF19FC002AC3BF /* CameraPickerFlashHeaderView.m */; };
@@ -84,8 +85,10 @@
 		C33A002920B2F0BE001F90E6 /* AVCapturePhoto+CameraPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AVCapturePhoto+CameraPicker.m"; sourceTree = "<group>"; };
 		C33A002B20B2F161001F90E6 /* CameraPickerAVFoundationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerAVFoundationModel.h; sourceTree = "<group>"; };
 		C33A002C20B2F161001F90E6 /* CameraPickerAVFoundationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerAVFoundationModel.m; sourceTree = "<group>"; };
-		C34E714420AF0FF2002AC3BF /* CameraPickerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerController.h; sourceTree = "<group>"; };
-		C34E714520AF0FF2002AC3BF /* CameraPickerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPickerController.m; sourceTree = "<group>"; };
+		C33A002F20B30651001F90E6 /* ImagePickerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagePickerController.h; sourceTree = "<group>"; };
+		C33A003020B30651001F90E6 /* ImagePickerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagePickerController.m; sourceTree = "<group>"; };
+		C33A003320B3131A001F90E6 /* PhotosLibraryPickerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotosLibraryPickerController.h; sourceTree = "<group>"; };
+		C33A003420B3131A001F90E6 /* PhotosLibraryPickerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotosLibraryPickerController.m; sourceTree = "<group>"; };
 		C34E714820AF1461002AC3BF /* CameraButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraButton.h; sourceTree = "<group>"; };
 		C34E714920AF1461002AC3BF /* CameraButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraButton.m; sourceTree = "<group>"; };
 		C34E714B20AF1775002AC3BF /* CameraPickerAppearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraPickerAppearance.h; sourceTree = "<group>"; };
@@ -166,6 +169,29 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C33A002E20B305E8001F90E6 /* app */ = {
+			isa = PBXGroup;
+			children = (
+				C3CF30FE209C5BBA005AFD40 /* KernelGenerator.m */,
+				C3CF30FD209C5BBA005AFD40 /* KernelGenerator.h */,
+				C3C35084205ACD5E000087AF /* main.m */,
+				C3C35083205ACD5E000087AF /* Info.plist */,
+				C3C35080205ACD5E000087AF /* LaunchScreen.storyboard */,
+				C3C35076205ACD5E000087AF /* AppDelegate.m */,
+				C3C35075205ACD5E000087AF /* AppDelegate.h */,
+			);
+			path = app;
+			sourceTree = "<group>";
+		};
+		C33A003220B312F0001F90E6 /* PhotoPicker */ = {
+			isa = PBXGroup;
+			children = (
+				C33A003320B3131A001F90E6 /* PhotosLibraryPickerController.h */,
+				C33A003420B3131A001F90E6 /* PhotosLibraryPickerController.m */,
+			);
+			path = PhotoPicker;
+			sourceTree = "<group>";
+		};
 		C34E714720AF144D002AC3BF /* CameraPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,20 +267,15 @@
 		C3C35074205ACD5E000087AF /* test */ = {
 			isa = PBXGroup;
 			children = (
-				C34E714720AF144D002AC3BF /* CameraPicker */,
 				C3CF30FB209C4A0B005AFD40 /* Media.xcassets */,
-				C3C35075205ACD5E000087AF /* AppDelegate.h */,
-				C3C35076205ACD5E000087AF /* AppDelegate.m */,
+				C33A002E20B305E8001F90E6 /* app */,
+				C33A003220B312F0001F90E6 /* PhotoPicker */,
+				C34E714720AF144D002AC3BF /* CameraPicker */,
 				C3C35078205ACD5E000087AF /* ViewController.h */,
 				C3C35079205ACD5E000087AF /* ViewController.m */,
 				C3C3507B205ACD5E000087AF /* Main.storyboard */,
-				C3C35080205ACD5E000087AF /* LaunchScreen.storyboard */,
-				C3C35083205ACD5E000087AF /* Info.plist */,
-				C3C35084205ACD5E000087AF /* main.m */,
-				C3CF30FD209C5BBA005AFD40 /* KernelGenerator.h */,
-				C3CF30FE209C5BBA005AFD40 /* KernelGenerator.m */,
-				C34E714420AF0FF2002AC3BF /* CameraPickerController.h */,
-				C34E714520AF0FF2002AC3BF /* CameraPickerController.m */,
+				C33A002F20B30651001F90E6 /* ImagePickerController.h */,
+				C33A003020B30651001F90E6 /* ImagePickerController.m */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -288,6 +309,7 @@
 				C3C3506E205ACD5E000087AF /* Sources */,
 				C3C3506F205ACD5E000087AF /* Frameworks */,
 				C3C35070205ACD5E000087AF /* Resources */,
+				5543DE5C61CEB69D18D0DE77 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -427,6 +449,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5543DE5C61CEB69D18D0DE77 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-test/Pods-test-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/QBImagePickerController/QBImagePicker.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-test/Pods-test-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		89C2A91369D42B92273D9F8B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -470,6 +510,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C33A003520B3131A001F90E6 /* PhotosLibraryPickerController.m in Sources */,
 				C3CF30FF209C5BBA005AFD40 /* KernelGenerator.m in Sources */,
 				C33A001820B2DD4A001F90E6 /* CameraPickerUIUtils.m in Sources */,
 				C33A000C20B2CF3F001F90E6 /* CameraPickerPhotoCaptureDelegate.m in Sources */,
@@ -477,13 +518,13 @@
 				C34E714A20AF1461002AC3BF /* CameraButton.m in Sources */,
 				C34E715320AF264A002AC3BF /* CameraPickerOverlayView.m in Sources */,
 				C34E714D20AF1776002AC3BF /* CameraPickerAppearance.m in Sources */,
+				C33A003120B30651001F90E6 /* ImagePickerController.m in Sources */,
 				C33A001220B2DC24001F90E6 /* CameraPickerPreviewView.m in Sources */,
 				C33A002720B2E3DE001F90E6 /* UIImage+CameraPicker.m in Sources */,
 				C3C3507A205ACD5E000087AF /* ViewController.m in Sources */,
 				C33A002420B2E32A001F90E6 /* UIButton+CameraPicker.m in Sources */,
 				C33A001E20B2DDC4001F90E6 /* CameraPickerUnfoldableOptionsView.m in Sources */,
 				C33A001520B2DC76001F90E6 /* CameraPickerResourceLoader.m in Sources */,
-				C34E714620AF0FF2002AC3BF /* CameraPickerController.m in Sources */,
 				C3C35085205ACD5E000087AF /* main.m in Sources */,
 				C33A002A20B2F0BE001F90E6 /* AVCapturePhoto+CameraPicker.m in Sources */,
 				C33A000F20B2D8A3001F90E6 /* CameraPickerPhotoResizeHeaderView.m in Sources */,
