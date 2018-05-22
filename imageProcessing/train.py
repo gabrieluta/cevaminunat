@@ -1,93 +1,130 @@
-from losses import wasserstein_loss, perceptual_loss
-from model import generator_model, discriminator_model, generator_containing_discriminator, generator_containing_discriminator_multiple_outputs
-from keras.optimizers import Adam
-from keras.preprocessing.image import img_to_array, load_img
-
+import matplotlib.pyplot as plt
 import numpy as np
 import os
+
+from losses import wasserstein_loss, perceptual_loss, SSIM, PSNR
+from model import generator, discriminator, generator_and_discriminator
+from keras.optimizers import Adam
+from keras.preprocessing.image import img_to_array, load_img
 from PIL import Image
 from numpy import *
 
-epoch_num = 10
+train_blurred_path = "/data/blurred_sharp/blurred/"
+train_sharp_path = "/data/blurred_sharp/sharp/"
+
+epochs = 10
 batch_size = 4
-critic_updates = 5
+
 
 def load_data():
-    train_path = "/data/blurred_sharp/blurred/"
-    image_list = sorted(os.listdir(train_path))[:100]
-    imgs_train = [(img_to_array(load_img(train_path + image).resize((256, 256), Image.ANTIALIAS)) - 127.5)/127.5 for image in image_list]
+    blurred_images = []
+    sharp_images = []
 
-    imgs_train = np.asarray(imgs_train)
+    if os.path.exists(train_blurred_path) and os.path.exists(train_sharp_path):
 
-    mask_path = "/data/blurred_sharp/sharp/"
-    image_list = sorted(os.listdir(mask_path))[:100]
-    imgs_mask_train = [(img_to_array(load_img(mask_path + image).resize((256, 256), Image.ANTIALIAS)) - 127.5)/127.5 for image in image_list]
-    imgs_mask_train = np.asarray(imgs_mask_train)
+        image_list = sorted(os.listdir(train_blurred_path))[:100]
+        blurred_images = np.asarray(
+            [(img_to_array(load_img(train_blurred_path + image).resize((256, 256), Image.ANTIALIAS)) - 128) / 128
+             for image in image_list])
 
-    return imgs_train, imgs_mask_train
+        image_list = sorted(os.listdir(train_sharp_path))[:100]
+        sharp_images = np.asarray(
+            [(img_to_array(load_img(train_sharp_path + image).resize((256, 256), Image.ANTIALIAS)) - 128) / 128 for
+             image in image_list])
+
+    else:
+        print("You gave a invalid train path!")
+
+    return blurred_images, sharp_images
+
+
+def save_weights(gan):
+    path = os.path.join("/data/weights")
+    if not os.path.exists(path):
+        os.makedirs(path)
+    gan.save_weights(os.path.join(path, 'gan.h5'), True)
+
 
 def train():
+    print("Starting training")
+    os.system("nvidia-smi")
+    print('Epochs: {}'.format(epochs))
+    print('Batch size: {}'.format(batch_size))
 
-    x_train, y_train = load_data()
-
-    g = generator_model()
-    d = discriminator_model()
-    d_on_g = generator_containing_discriminator_multiple_outputs(g, d)
-
+    blurred, sharp = load_data()
     opt = Adam(lr=1E-4, beta_1=0.9, beta_2=0.999, epsilon=1e-08)
-
-    d.trainable = True
-    d.compile(optimizer=opt, loss=wasserstein_loss)
-    d.trainable = False
     loss = [perceptual_loss, wasserstein_loss]
-    loss_weights = [100, 1]
-    d_on_g.compile(optimizer=opt, loss=loss, loss_weights=loss_weights)
-    d.trainable = True
+    metrics = [PSNR]
+    true_batch = np.ones((batch_size, 1))
+    false_batch = np.zeros((batch_size, 1))
+    best_loss = 100000
 
-    output_true_batch, output_false_batch = np.ones((batch_size, 1)), np.zeros((batch_size, 1))
+    generator_model = generator()
+    discriminator_model = discriminator()
+    gan = generator_and_discriminator(generator_model, discriminator_model)
 
-    d_on_g.summary()
+    discriminator_model.trainable = True
+    discriminator_model.compile(optimizer=opt, loss=wasserstein_loss)
+    discriminator_model.trainable = False
 
-    # os.system("nvidia-smi")
+    gan.compile(optimizer=opt, loss=loss, loss_weights=[100, 1], metrics=metrics)
+    discriminator_model.trainable = True
 
+    print("Generator summary:")
+    discriminator_model.summary()
+    print("Discriminator summary:")
+    discriminator_model.summary()
+    print("GAN summary:")
+    gan.summary()
 
-    for epoch in range(epoch_num):
-        print('epoch: {}/{}'.format(epoch, epoch_num))
-        print('batches: {}'.format(x_train.shape[0] / batch_size))
+    for epoch in range(epochs):
+        print('Epoch: {}/{}'.format(epoch, epochs))
+        print('Batches: {}'.format(blurred.shape[0] / batch_size))
 
-        permutated_indexes = np.random.permutation(x_train.shape[0])
+        permutated_indexes = np.random.permutation(blurred.shape[0])
 
-        d_losses = []
-        d_on_g_losses = []
-        for index in range(int(x_train.shape[0] / batch_size)):
-            batch_indexes = permutated_indexes[index * batch_size:(index + 1) * batch_size]
-            image_blur_batch = x_train[batch_indexes]
-            image_full_batch = y_train[batch_indexes]
+        discriminator_losses = []
+        # discriminator_accuracies = []
+        gan_losses = []
+        gan_accuracies = []
 
-            generated_images = g.predict(x=image_blur_batch, batch_size=batch_size)
+        for batch in range(int(blurred.shape[0] / batch_size)):
+            batch_indexes = permutated_indexes[batch * batch_size:(batch + 1) * batch_size]
+            image_blur_batch = blurred[batch_indexes]
+            image_full_batch = sharp[batch_indexes]
 
-            for _ in range(critic_updates):
-                d_loss_real = d.train_on_batch(image_full_batch, output_true_batch)
-                d_loss_fake = d.train_on_batch(generated_images, output_false_batch)
-                d_loss = 0.5 * np.add(d_loss_fake, d_loss_real)
-                d_losses.append(d_loss)
+            # print(image_blur_batch.shape())
+            # print(image_full_batch.shape())
 
-            print('batch {} d_loss : {}'.format(index + 1, np.mean(d_losses)))
+            for _ in range(5):
+                generated_images = generator_model.predict(x=image_blur_batch, batch_size=batch_size)
+                discriminator_loss_real = discriminator_model.train_on_batch(image_full_batch, true_batch)
+                discriminator_loss_fake = discriminator_model.train_on_batch(generated_images, false_batch)
 
-            d.trainable = False
+                mean_discriminator_loss = np.add(discriminator_loss_fake, discriminator_loss_real) / 2
+                # mean_discriminator_acc = np.add(discriminator_acc_fake, discriminator_acc_real) / 2
 
-            # os.system("nvidia-smi")
+                discriminator_losses.append(mean_discriminator_loss)
+                # discriminator_accuracies.append(mean_discriminator_acc)
 
-            print(image_blur_batch.shape())
-            print(image_full_batch.shape())
-            d_on_g_loss = d_on_g.train_on_batch(image_blur_batch, [image_full_batch, output_true_batch])
-            d_on_g_losses.append(d_on_g_loss)
-            print('batch {} d_on_g_loss : {}'.format(index + 1, d_on_g_loss))
+            print('Batch {} discriminator loss : {}'.format(batch + 1, np.mean(discriminator_losses)))
+            # print('Batch {} discriminator acc : {}'.format(batch + 1, np.mean(discriminator_accuracies)))
 
-            d.trainable = True
+            discriminator_model.trainable = False
 
-        with open('log.txt', 'a') as f:
-            f.write('{} - {} - {}\n'.format(epoch, np.mean(d_losses), np.mean(d_on_g_losses)))
+            gan_out = gan.train_on_batch(image_blur_batch, [image_full_batch, true_batch])
+            gan_loss = gan_out[0]
+            gan_acc = gan_out[1]
+
+            gan_losses.append(gan_loss)
+            gan_accuracies.append(gan_acc)
+            print('Batch {} discriminator - generator loss : {}'.format(batch + 1, gan_out))
+            print('Batch {} discriminator - generator acc : {}'.format(batch + 1, gan_acc))
+
+            discriminator_model.trainable = True
+
+        if gan_loss < best_loss:
+            save_weights(gan)
 
 
 if __name__ == '__main__':

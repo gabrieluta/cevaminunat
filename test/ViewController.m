@@ -7,8 +7,9 @@
 //
 
 #import "ViewController.h"
-#import <Accelerate/Accelerate.h>
+
 #import "KernelGenerator.h"
+#import "ImagePickerController.h"
 
 @interface ViewController ()
 
@@ -69,9 +70,9 @@
 }
 
 - (void)presentImagePickerControllerWithOptions:(NSDictionary *)options
-                                       delegate:(id<PSAImagePickerControllerDelegate>)delegate {
+                                       delegate:(id<ImagePickerControllerDelegate>)delegate {
     
-    PSAImagePickerController *imagePickerController = [[PSAImagePickerController alloc] initWithOptions:options];
+    ImagePickerController *imagePickerController = [[ImagePickerController alloc] initWithOptions:options];
     imagePickerController.delegate = delegate;
     
     self.pickerController = imagePickerController;
