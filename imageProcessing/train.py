@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib
 import numpy as np
 import os
 import tensorflow as tf
@@ -13,7 +14,7 @@ from numpy import *
 train_blurred_path = "/data/blurred_sharp/blurred/"
 train_sharp_path = "/data/blurred_sharp/sharp/"
 
-epochs = 10
+epochs = 2
 batch_size = 4
 
 batch_size = 4
@@ -118,47 +119,50 @@ def evaluate_gan():
             gan_out = gan.train_on_batch(image_blur_batch, [image_sharp_batch, true_batch])
 
             if batch == int(blurred.shape[0] / batch_size) - 1:
-                print("gan_out[0]: {}".format(gan_out[0]))
-                print("gan_out[2]: {}".format(gan_out[2]))
-                print("scores[0]: {}".format(scores[0]))
-                print("scores[1]: {}".format(scores[1]))
-
                 gan_perceptual_losses.append(gan_out[0])
                 # gan_out[1]
                 gan_wasserstein_losses.append(gan_out[2])
 
                 # Generator test performance:
                 scores = generator_model.evaluate(generated_images, image_sharp_batch, batch_size=batch_size)
+                print("scores: {}".format(scores))
                 generator_perceptual_losses.append(scores[0])
                 generator_psnr_metrics.append(scores[1])
+
+                print("gan_out[0]: {}".format(gan_out[0]))
+                print("gan_out[2]: {}".format(gan_out[2]))
+                print("scores[0]: {}".format(scores[0]))
+                print("scores[1]: {}".format(scores[1]))
 
             discriminator_model.trainable = True
 
             # we suppose that wasserstein loss is also the best for this model
             if gan_out[0] < best_loss:
+                print("Time to save weights")
                 save_weights(generator_model)
                 best_loss = gan_out[0]
 
-    print("len gan_perceptual_losses: {}".format(len(gan_perceptual_losses)))
-    print("len generator_perceptual_losses".format(len(generator_perceptual_losses)))
-    print("len generator_psnr_metrics".format(len(generator_psnr_metrics)))
+    print("generator_perceptual_losses: {}".format(generator_perceptual_losses))
+    print("generator_psnr_metrics: {}".format(generator_psnr_metrics))
 
 
     epoch_arr = [i for i in range(epochs)]
-    plt.plot(epoch_arr, gan_perceptual_losses, 'r')
-    plt.plot(epoch_arr, generator_perceptual_losses, 'b')
 
-    plt.title('Perceptual loss')
+    # matplotlib.use('Agg')
+
+    plt.plot(np.asarray(epoch_arr), np.asarray(generator_perceptual_losses))
+
+    plt.title('Generator perceptual loss')
     plt.ylabel('loss')
     plt.xlabel('epoch')
 
-    plt.savefig("/data/image_processing/perc.png")
+    plt.savefig("/data/image_processing/perceptual.png")
     plt.close()
 
-    plt.plot(epoch_arr, generator_psnr_metrics)
+    plt.plot(np.asarray(epoch_arr), np.asarray(generator_psnr_metrics))
 
-    plt.title('generator_psnr_metrics')
-    plt.ylabel('psnr')
+    plt.title('Generator PSNR')
+    plt.ylabel('PSNR')
     plt.xlabel('epoch')
 
     plt.savefig("/data/image_processing/psnr.png")
