@@ -1,5 +1,4 @@
 from keras.layers import Input, Conv2DTranspose, Conv2D, Dropout, Activation, Add
-from keras.layers.normalization import BatchNormalization
 from keras.layers.core import Dense, Flatten, Lambda
 from keras.models import Model
 from keras.layers.advanced_activations import LeakyReLU
@@ -14,18 +13,18 @@ from numpy import *
 inputs = Input((256, 256, 3))
 res_blocks = 9
 
-def generator():
 
+def generator():
     x = ReflectionPadding2D((3, 3))(inputs)
     x = Conv2D(filters=64, kernel_size=(7, 7), padding='valid')(x)
-    x = BatchNormalization()(x)
+    x = InstanceNormalization()(x)
     x = Activation('relu')(x)
 
     n_downsampling = 2
     for i in range(n_downsampling):
         mult = 2 ** i
         x = Conv2D(filters=64 * mult * 2, kernel_size=(3, 3), strides=2, padding='same')(x)
-        x = BatchNormalization()(x)
+        x = InstanceNormalization()(x)
         x = Activation('relu')(x)
 
     mult = 2 ** n_downsampling
@@ -42,7 +41,7 @@ def generator():
                    kernel_size=kernel_size,
                    strides=strides, )(x)
 
-        x = BatchNormalization()(x)
+        x = InstanceNormalization()(x)
         x = Activation('relu')(x)
 
         x = Dropout(0.5)(x)
@@ -52,14 +51,14 @@ def generator():
                    kernel_size=kernel_size,
                    strides=strides, )(x)
 
-        x = BatchNormalization()(x)
+        x = InstanceNormalization()(x)
 
         x = Add()([input, x])
 
     for i in range(2):
         mult = 2 ** (2 - i)
         x = Conv2DTranspose(filters=int(64 * mult / 2), kernel_size=(3, 3), strides=2, padding='same')(x)
-        x = BatchNormalization()(x)
+        x = InstanceNormalization()(x)
         x = Activation('relu')(x)
 
     x = ReflectionPadding2D((3, 3))(x)
@@ -73,9 +72,7 @@ def generator():
     return model
 
 
-
 def discriminator():
-
     n_layers, use_sigmoid = 3, False
 
     x = Conv2D(filters=64, kernel_size=(4, 4), strides=2, padding='same')(inputs)
@@ -85,12 +82,12 @@ def discriminator():
     for n in range(n_layers):
         nf_mult_prev, nf_mult = nf_mult, min(2 ** n, 8)
         x = Conv2D(filters=64 * nf_mult, kernel_size=(4, 4), strides=2, padding='same')(x)
-        x = BatchNormalization()(x)
+        x = InstanceNormalization()(x)
         x = LeakyReLU(0.2)(x)
 
     nf_mult_prev, nf_mult = nf_mult, min(2 ** n_layers, 8)
     x = Conv2D(filters=64 * nf_mult, kernel_size=(4, 4), strides=1, padding='same')(x)
-    x = BatchNormalization()(x)
+    x = InstanceNormalization()(x)
     x = LeakyReLU(0.2)(x)
 
     x = Conv2D(filters=1, kernel_size=(4, 4), strides=1, padding='same')(x)
@@ -107,10 +104,6 @@ def discriminator():
 
 
 def generator_and_discriminator(generator, discriminator):
-
-    generator.summary()
-    discriminator.summary()
-
     generated_image = generator(inputs)
     outputs = discriminator(generated_image)
     model = Model(inputs=inputs, outputs=[generated_image, outputs])

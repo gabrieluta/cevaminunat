@@ -9,7 +9,7 @@ from model import generator
 batch_size = 4
 test_blurred_path = "/data/blurred_sharp/blurred/"
 test_sharp_path = "/data/blurred_sharp/sharp/"
-process_parameter = 128
+process_parameter = 127.5
 
 
 def test():
@@ -25,7 +25,13 @@ def test():
 
     generator_model = generator()
     print("Loading weights")
-    generator_model.load_weights('weights.h5')
+    weights_path = "/data/weights/weights.h5"
+    if os.path.exists(weights_path):
+        print("Loading weights")
+        generator_model.load_weights(weights_path)
+
+    else:
+        print("You gave an invalid weights path!")
 
     print("Generator is making predictions")
     generated_images = generator_model.predict(x=images_test_blurred, batch_size=batch_size)
