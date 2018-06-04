@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib
+matplotlib.use("TkAgg")
 import numpy as np
 import os
 import tensorflow as tf
@@ -14,9 +15,7 @@ from numpy import *
 train_blurred_path = "/data/blurred_sharp/blurred/"
 train_sharp_path = "/data/blurred_sharp/sharp/"
 
-epochs = 2
-batch_size = 4
-
+epochs = 10
 batch_size = 4
 test_blurred_path = "/data/blurred_sharp/blurred/"
 test_sharp_path = "/data/blurred_sharp/sharp/"
@@ -29,12 +28,12 @@ def load_data():
 
     if os.path.exists(train_blurred_path) and os.path.exists(train_sharp_path):
 
-        image_list = sorted(os.listdir(train_blurred_path))[:10]
+        image_list = sorted(os.listdir(train_blurred_path))
         blurred_images = np.asarray(
             [(img_to_array(load_img(train_blurred_path + image).resize((256, 256), Image.ANTIALIAS)) - 127.5) / 127.5
              for image in image_list])
 
-        image_list = sorted(os.listdir(train_sharp_path))[:10]
+        image_list = sorted(os.listdir(train_sharp_path))
         sharp_images = np.asarray(
             [(img_to_array(load_img(train_sharp_path + image).resize((256, 256), Image.ANTIALIAS)) - 127.5) / 127.5 for
              image in image_list])
@@ -84,6 +83,7 @@ def evaluate_gan():
     # gan.summary()
     best_loss = 100000
     discriminator_losses = []
+    mean_discriminator_losses = []
     gan_perceptual_losses = []
     gan_wasserstein_losses = []
     generator_perceptual_losses = []
@@ -100,9 +100,6 @@ def evaluate_gan():
             image_blur_batch = blurred[batch_indexes]
             image_sharp_batch = sharp[batch_indexes]
 
-            # print(image_blur_batch.shape())
-            # print(image_full_batch.shape())
-
             for _ in range(5):
                 generated_images = generator_model.predict(x=image_blur_batch, batch_size=batch_size)
                 discriminator_loss_real = discriminator_model.train_on_batch(image_sharp_batch, true_batch)
@@ -111,7 +108,8 @@ def evaluate_gan():
                 mean_discriminator_loss = np.add(discriminator_loss_fake, discriminator_loss_real) / 2
                 discriminator_losses.append(mean_discriminator_loss)
 
-            print('Batch {} discriminator loss : {}'.format(batch + 1, np.mean(discriminator_losses)))
+            mean_discriminator_loss = np.mean(discriminator_losses)
+            print('Batch {} discriminator loss : {}'.format(batch + 1, mean_discriminator_loss))
 
             discriminator_model.trainable = False
 
@@ -119,20 +117,21 @@ def evaluate_gan():
             gan_out = gan.train_on_batch(image_blur_batch, [image_sharp_batch, true_batch])
 
             if batch == int(blurred.shape[0] / batch_size) - 1:
-                gan_perceptual_losses.append(gan_out[0])
-                # gan_out[1]
+                gan_perceptual_losses.append(gan_out[1])
                 gan_wasserstein_losses.append(gan_out[2])
 
-                # Generator test performance:
+                # Generator performance:
                 scores = generator_model.evaluate(generated_images, image_sharp_batch, batch_size=batch_size)
                 print("scores: {}".format(scores))
                 generator_perceptual_losses.append(scores[0])
                 generator_psnr_metrics.append(scores[1])
 
-                print("gan_out[0]: {}".format(gan_out[0]))
+                print("gan_out[1]: {}".format(gan_out[1]))
                 print("gan_out[2]: {}".format(gan_out[2]))
                 print("scores[0]: {}".format(scores[0]))
                 print("scores[1]: {}".format(scores[1]))
+
+                mean_discriminator_losses.append(mean_discriminator_loss)
 
             discriminator_model.trainable = True
 
@@ -145,18 +144,16 @@ def evaluate_gan():
     print("generator_perceptual_losses: {}".format(generator_perceptual_losses))
     print("generator_psnr_metrics: {}".format(generator_psnr_metrics))
 
-
     epoch_arr = [i for i in range(epochs)]
-
-    # matplotlib.use('Agg')
+    batch_epoch_arr = [i for i in range(epochs * batch_size)]
 
     plt.plot(np.asarray(epoch_arr), np.asarray(generator_perceptual_losses))
 
     plt.title('Generator perceptual loss')
-    plt.ylabel('loss')
+    plt.ylabel('perceptual')
     plt.xlabel('epoch')
 
-    plt.savefig("/data/image_processing/perceptual.png")
+    plt.savefig("generator_perceptual.png")
     plt.close()
 
     plt.plot(np.asarray(epoch_arr), np.asarray(generator_psnr_metrics))
@@ -165,8 +162,37 @@ def evaluate_gan():
     plt.ylabel('PSNR')
     plt.xlabel('epoch')
 
-    plt.savefig("/data/image_processing/psnr.png")
+    plt.savefig("generator_psnr.png")
     plt.close()
+
+    plt.plot(np.asarray(epoch_arr), np.asarray(gan_perceptual_losses))
+
+    plt.title('GAN perceptual loss')
+    plt.ylabel('perceptual')
+    plt.xlabel('epoch')
+
+    plt.savefig("GAN_perceptual.png")
+    plt.close()
+
+    plt.plot(np.asarray(epoch_arr), np.asarray(gan_wasserstein_losses))
+
+    plt.title('GAN wasserstein loss')
+    plt.ylabel('wasserstein')
+    plt.xlabel('epoch')
+
+    plt.savefig("GAN_wasserstein.png")
+    plt.close()
+
+    plt.plot(np.asarray(epoch_arr), np.asarray(mean_discriminator_losses))
+
+    plt.title('Discriminator wasserstein loss')
+    plt.ylabel('wasserstein')
+    plt.xlabel('epoch')
+
+    plt.savefig("discriminator_wasserstein.png")
+    plt.close()
+
+
 
 
 if __name__ == '__main__':
