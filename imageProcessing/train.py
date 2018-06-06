@@ -44,11 +44,11 @@ def load_data():
     return blurred_images, sharp_images
 
 
-def save_weights(generator):
+def save_weights(model):
     path = os.path.join("/data/weights")
     if not os.path.exists(path):
         os.makedirs(path)
-    generator.save_weights(os.path.join(path, 'weights.h5'), overwrite=True)
+    model.save_weights(os.path.join(path, 'generator_weights.h5'), overwrite=True)
 
 
 def evaluate_gan():
@@ -62,7 +62,10 @@ def evaluate_gan():
     true_batch = np.ones((batch_size, 1))
     false_batch = np.zeros((batch_size, 1))
 
-    generator_model = generator()
+    initial_generator_model, generator_model = generator()
+    initial_generator_model.summary()
+    generator_model.summary()
+
     discriminator_model = discriminator()
     gan = generator_and_discriminator(generator_model, discriminator_model)
 
@@ -81,6 +84,7 @@ def evaluate_gan():
     # discriminator_model.summary()
     # print("GAN summary:")
     # gan.summary()
+
     best_loss = 100000
     discriminator_losses = []
     mean_discriminator_losses = []
@@ -138,7 +142,7 @@ def evaluate_gan():
             # we suppose that wasserstein loss is also the best for this model
             if gan_out[0] < best_loss:
                 print("Time to save weights")
-                save_weights(generator_model)
+                save_weights(initial_generator_model)
                 best_loss = gan_out[0]
 
     print("generator_perceptual_losses: {}".format(generator_perceptual_losses))

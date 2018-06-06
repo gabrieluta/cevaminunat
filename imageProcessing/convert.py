@@ -16,6 +16,7 @@ def convert_lambda(layer):
 
 def convert():
     generator_model = generator()
+    generator_model.load_weights("/data/weights/weights.h5")
     coreml_model = coremltools.converters.keras.convert(generator_model,
                                                         input_names='blurred_img',
                                                         output_names='sharp_img',

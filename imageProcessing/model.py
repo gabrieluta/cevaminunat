@@ -16,7 +16,7 @@ res_blocks = 9
 
 
 def lambda_function(x):
-    lambda x: x / 2
+    return x / 2
 
 def generator():
     x = ReflectionPadding2D((3, 3))(inputs)
@@ -71,11 +71,12 @@ def generator():
 
     outputs = Add()([x, inputs])
     outputs = Lambda(lambda_function)(outputs)
+    # outputs = Lambda(lambda z: z / 2)(outputs)
 
     model = Model(inputs=inputs, outputs=outputs, name='Generator')
-    model = multi_gpu_model(model, gpus=4)
+    model_multiple_gpu = multi_gpu_model(model, gpus=4)
 
-    return model
+    return [model, model_multiple_gpu]
 
 
 def discriminator():
@@ -114,6 +115,5 @@ def generator_and_discriminator(generator, discriminator):
     generated_image = generator(inputs)
     outputs = discriminator(generated_image)
     model = Model(inputs=inputs, outputs=[generated_image, outputs])
-    model = multi_gpu_model(model, gpus=4)
 
     return model
