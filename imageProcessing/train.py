@@ -15,7 +15,7 @@ from numpy import *
 train_blurred_path = "/data/blurred_sharp/blurred/"
 train_sharp_path = "/data/blurred_sharp/sharp/"
 
-epochs = 10
+epochs = 5
 batch_size = 4
 test_blurred_path = "/data/blurred_sharp/blurred/"
 test_sharp_path = "/data/blurred_sharp/sharp/"
@@ -143,6 +143,11 @@ def evaluate_gan():
 
     print("generator_perceptual_losses: {}".format(generator_perceptual_losses))
     print("generator_psnr_metrics: {}".format(generator_psnr_metrics))
+
+    print("gan_perceptual_losses: {}".format(gan_perceptual_losses))
+    print("gan_wasserstein_losses: {}".format(gan_wasserstein_losses))
+
+    print("mean_discriminator_losses: {}".format(mean_discriminator_losses))
 
     epoch_arr = [i for i in range(epochs)]
     batch_epoch_arr = [i for i in range(epochs * batch_size)]

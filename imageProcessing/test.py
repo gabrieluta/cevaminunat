@@ -7,20 +7,20 @@ from keras.preprocessing.image import img_to_array, load_img
 from model import generator
 
 batch_size = 4
-test_blurred_path = "/data/blurred_sharp/blurred/"
-test_sharp_path = "/data/blurred_sharp/sharp/"
+test_blurred_path = "/data/blurred_sharp/test_blurred/"
+test_sharp_path = "/data/blurred_sharp/test_sharp/"
 process_parameter = 127.5
 
 
 def test():
 
-    image_list = sorted(os.listdir(test_blurred_path))[:100]
+    image_list = sorted(os.listdir(test_blurred_path))
     images_test_blurred = np.asarray([(img_to_array(load_img(test_blurred_path + image).resize((256, 256), Image.ANTIALIAS)) - process_parameter) / process_parameter for image in image_list])
 
     n_images = len(images_test_blurred)
     print("Testing on {} images".format(n_images))
 
-    image_list = sorted(os.listdir(test_sharp_path))[:100]
+    image_list = sorted(os.listdir(test_sharp_path))
     images_test_sharp = np.asarray([(img_to_array(load_img(test_sharp_path + image).resize((256, 256), Image.ANTIALIAS)) - process_parameter) / process_parameter for image in image_list])
 
     generator_model = generator()

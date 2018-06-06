@@ -4,6 +4,7 @@ from keras.models import Model
 from keras.layers.advanced_activations import LeakyReLU
 from utils import ReflectionPadding2D
 from keras_contrib.layers.normalization import InstanceNormalization
+from keras.utils import multi_gpu_model
 
 import numpy as np
 import os
@@ -13,6 +14,9 @@ from numpy import *
 inputs = Input((256, 256, 3))
 res_blocks = 9
 
+
+def lambda_function(x):
+    lambda x: x / 2
 
 def generator():
     x = ReflectionPadding2D((3, 3))(inputs)
@@ -66,9 +70,11 @@ def generator():
     x = Activation('tanh')(x)
 
     outputs = Add()([x, inputs])
-    outputs = Lambda(lambda z: z / 2)(outputs)
+    outputs = Lambda(lambda_function)(outputs)
 
     model = Model(inputs=inputs, outputs=outputs, name='Generator')
+    model = multi_gpu_model(model, gpus=4)
+
     return model
 
 
@@ -99,6 +105,7 @@ def discriminator():
     x = Dense(1, activation='sigmoid')(x)
 
     model = Model(inputs=inputs, outputs=x, name='Discriminator')
+    model = multi_gpu_model(model, gpus=4)
 
     return model
 
@@ -107,5 +114,6 @@ def generator_and_discriminator(generator, discriminator):
     generated_image = generator(inputs)
     outputs = discriminator(generated_image)
     model = Model(inputs=inputs, outputs=[generated_image, outputs])
+    model = multi_gpu_model(model, gpus=4)
 
     return model
