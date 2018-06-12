@@ -12,13 +12,11 @@ from keras.preprocessing.image import img_to_array, load_img
 from PIL import Image
 from numpy import *
 
-train_blurred_path = "/data/blurred_sharp/blurred/"
-train_sharp_path = "/data/blurred_sharp/sharp/"
+train_blurred_path = "/data/image_deblurring/large_dataset/train/blurred/"
+train_sharp_path = "/data/image_deblurring/large_dataset/train/sharp/"
 
-epochs = 5
+epochs = 10
 batch_size = 4
-test_blurred_path = "/data/blurred_sharp/blurred/"
-test_sharp_path = "/data/blurred_sharp/sharp/"
 process_parameter = 127.5
 
 
@@ -29,6 +27,7 @@ def load_data():
     if os.path.exists(train_blurred_path) and os.path.exists(train_sharp_path):
 
         image_list = sorted(os.listdir(train_blurred_path))
+        image_list = [img for img in image_list]
         blurred_images = np.asarray(
             [(img_to_array(load_img(train_blurred_path + image).resize((256, 256), Image.ANTIALIAS)) - 127.5) / 127.5
              for image in image_list])
@@ -45,7 +44,7 @@ def load_data():
 
 
 def save_weights(model):
-    path = os.path.join("/data/weights")
+    path = os.path.join("/data/image_deblurring/")
     if not os.path.exists(path):
         os.makedirs(path)
     model.save_weights(os.path.join(path, 'generator_weights.h5'), overwrite=True)

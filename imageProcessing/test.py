@@ -1,5 +1,6 @@
 import os
 import matplotlib.pyplot as plt
+import numpy as np
 
 from PIL import Image
 from numpy import *
@@ -7,8 +8,8 @@ from keras.preprocessing.image import img_to_array, load_img
 from model import generator
 
 batch_size = 4
-test_blurred_path = "/data/blurred_sharp/test_blurred/"
-test_sharp_path = "/data/blurred_sharp/test_sharp/"
+test_blurred_path = "/data/image_deblurring/large_dataset/test/blurred/"
+test_sharp_path = "/data/image_deblurring/large_dataset/test/sharp/"
 process_parameter = 127.5
 
 
@@ -23,9 +24,10 @@ def test():
     image_list = sorted(os.listdir(test_sharp_path))
     images_test_sharp = np.asarray([(img_to_array(load_img(test_sharp_path + image).resize((256, 256), Image.ANTIALIAS)) - process_parameter) / process_parameter for image in image_list])
 
-    generator_model = generator()
-    print("Loading weights")
-    weights_path = "/data/weights/weights.h5"
+    generator_model, generator_model_multiple_gpus = generator()
+
+    weights_path = "/data/weights/generator_weights.h5"
+
     if os.path.exists(weights_path):
         print("Loading weights")
         generator_model.load_weights(weights_path)
@@ -47,4 +49,7 @@ def test():
         img = generated[i, :, :, :]
         output = np.concatenate((y, x, img), axis=1)
         im = Image.fromarray(output.astype(np.uint8))
-        im.save('sharp{}.png'.format(i))
+        im.save('/data/image_deblurring/large_dataset/test/results/sharp{}.png'.format(i))
+
+if __name__ == '__main__':
+    test()
